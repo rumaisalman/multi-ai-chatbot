@@ -1,8 +1,7 @@
-import os
 import json
 import requests
-from dotenv import load_dotenv
 import streamlit as st
+
 
 st.markdown(
     """
@@ -18,10 +17,11 @@ st.markdown(
 
 
 
-load_dotenv(dotenv_path="C:/Users/Tesla Laptops/Desktop/rumaisa/class assignments/assignment1/assignment/src/assignment/.env")
-
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
-API_KEY = os.getenv("OPENROUTER_API_KEY")
+API_KEY = st.secrets["OPENROUTER_API_KEY"]
+st.write("API key starts with:", API_KEY[:6] + "..." if API_KEY else "No key found")
+
+
 
 HEADERS = {
     "Authorization": f"Bearer {API_KEY}",
@@ -48,7 +48,8 @@ prompt = st.text_input("Enter your prompt:")
 # Submit button
 if st.button("Get Answer"):
     if not API_KEY:
-        st.error("API key not loaded. Check your .env file.")
+       st.error("API key not loaded. Please check Streamlit Secrets.")
+
     elif not prompt:
         st.warning("Please enter a prompt.")
     else:
@@ -72,3 +73,4 @@ if st.button("Get Answer"):
 
         except Exception as e:
             st.error(f"Error from {model_name}: {str(e)}")
+
