@@ -25,8 +25,11 @@ st.write("API key starts with:", API_KEY[:6] + "..." if API_KEY else "No key fou
 
 HEADERS = {
     "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "HTTP-Referer": "https://multi-ai-chatbot-t.streamlit.app/",  
+    "X-Title": "Multi-AI Chatbot"
 }
+
 
 MODELS = {
     "GPT-3.5 Turbo": "openai/gpt-3.5-turbo",
